@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import Todo from './components/Todo'
-import AddTodo from './components/AddTodo'
-import RefreshButton from './components/RefreshButton'
+import Todo from './components/Todo';
+import AddTodo from './components/AddTodo';
+import RefreshButton from './components/RefreshButton';
+import { ToastContainer, toast } from 'react-toastify';
 import './App.css';
 
 class App extends Component {
@@ -33,12 +34,12 @@ class App extends Component {
     fetch("http://localhost:8080/api/todo/",config)
     .then(response => response.json())
     .then(data => {
+      this.notifySuccess("Todo item added successfully");
       const savedTodos = [...this.state.todos]
       savedTodos.push(data)
       this.setState({todos: savedTodos})
     })
   }
-
 
   onCheckboxChangeHandler = (event, todo) => {
     const changedItem = this.state.todos.findIndex(i => i.id === todo.id);
@@ -55,6 +56,7 @@ class App extends Component {
     fetch(`http://localhost:8080/api/todo/${todo.id}`,config)
     .then(response => response.json())
     .then(data => {
+      this.notifySuccess("Todo item updated successfully");
       const changedItem = this.state.todos.findIndex(i => i.id === todo.id);
       const savedTodos = [...this.state.todos]
       savedTodos[changedItem].done = data.done
@@ -65,12 +67,21 @@ class App extends Component {
   onRemoveHandler = (event, todo) => {
     fetch(`http://localhost:8080/api/todo/${todo.id}`, {method: "DELETE"})
     .then(response => {
+      this.notifySuccess("Todo item was removed successfully");
       const changedItem = this.state.todos.findIndex(i => i.id === todo.id);
       const savedTodos = [...this.state.todos]
       savedTodos.splice(changedItem, 1)
       this.setState({todos: savedTodos})
     })
   }
+
+  notifySuccess = (message) => {
+    toast.success(message, { 
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 3000,
+      newestOnTop: true
+    });
+  };
 
   render() {
     const rt = (
@@ -89,6 +100,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <ToastContainer />
           <RefreshButton onRefreshClick={this.onRefreshHandler.bind(this)}/>
           <h1 className="App-title">Todo List to Supero Test</h1>
           <AddTodo onSubmitHanlder={this.onSubmitHanlder}/>
