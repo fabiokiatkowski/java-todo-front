@@ -15,7 +15,7 @@ const todo = (props) => {
         />
       </div>
       <div className="panel-body">
-        <p>{props.todoItem.description}</p>
+        <p className="widthFix">{props.todoItem.description}</p>
       </div>
     </div>
   );

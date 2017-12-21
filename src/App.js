@@ -105,7 +105,7 @@ class App extends Component {
           <h1 className="App-title">Todo List to Supero Test</h1>
           <AddTodo onSubmitHanlder={this.onSubmitHanlder}/>
         </header>
-        <div className="App-intro">
+        <div>
           {rt}
         </div>
       </div>
