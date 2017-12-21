@@ -1,0 +1,36 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #222;
+  height: 10%;
+  padding-top: 5px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.displayGrid {
+  display: flex;
+  width: 100%;
+  flex-flow: row wrap;
+  flex: 1;
+  overflow-y: auto;
+  height: 65vh;
+  display: flex;
+}
+
+.formCard {
+  margin: 1% auto;
+  width: 10%;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 2px #ccc;
+  box-sizing: border-box;
+}
